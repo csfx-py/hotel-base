@@ -1,4 +1,4 @@
-const { app, BrowserWindow, screen } = require("electron");
+const { app, BrowserWindow, screen, ipcMain, dialog } = require("electron");
 const path = require("path");
 
 const isDev = !app.isPackaged;
@@ -8,18 +8,21 @@ if (isDev) {
   });
 }
 
+let mainWin = undefined
+
 function createWindow() {
   //const { width, height } = screen.getPrimaryDisplay().workAreaSize;
   const width = 800;
   const height = 600;
 
-  const mainWin = new BrowserWindow({
+  mainWin = new BrowserWindow({
     width: width,
     height: height,
     webPreferences: {
-      nodeIntegration: true,
+      nodeIntegration: false,
       contextIsolation: true,
       worldSafeExecuteJavaScript: true,
+      preload: path.join(__dirname, "preload.js"),
     },
   });
 
@@ -48,3 +51,10 @@ app.on("activate", () => {
 });
 
 // -------------------------------- I P C --------------------------------
+
+ipcMain.on("message", (e, data) => {
+  dialog.showMessageBox(mainWin, {
+    message: data.message,
+    title: data.title,
+  });
+});
