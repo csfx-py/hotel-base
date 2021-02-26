@@ -28,12 +28,14 @@ module.exports = {
         },
       },
       {
-        test: [/\.s[ac]ss$/i, /\.css$/i],
+        test: /\.(png|jp(e*)g|svg|gif)$/,
         use: [
-          // Creates `style` nodes from JS strings
-          "style-loader",
-          // Translates CSS into CommonJS
-          "css-loader",
+          {
+            loader: "file-loader",
+            options: {
+              name: "images/[hash]-[name].[ext]",
+            },
+          },
         ],
       },
     ],
@@ -46,3 +48,13 @@ module.exports = {
     path: path.resolve(__dirname, "build"),
   },
 };
+
+// {
+//   test: [/\.s[ac]ss$/i, /\.css$/i],
+//   use: [
+//     // Creates `style` nodes from JS strings
+//     "style-loader",
+//     // Translates CSS into CommonJS
+//     "css-loader",
+//   ],
+// },

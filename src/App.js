@@ -38,10 +38,10 @@ export default function App() {
 
   // -------------------Handle login-------------------
   const handleLoginValues = (e) => {
-    const { name, loginValue } = e.target;
+    const { name, value } = e.target;
     setLoginValues({
       ...loginValues,
-      [name]: loginValue,
+      [name]: value,
     });
   };
 
