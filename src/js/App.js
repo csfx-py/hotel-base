@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Home, Nav, LoginForm } from "./components";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import useLocalStorage from "./useLocalStorage";
 
 export default function App() {
   // -------------------authentication and authorization-------------------
@@ -10,48 +11,33 @@ export default function App() {
   });
 
   const [values, setValues] = useState({ email: "", password: "" });
-  const [token, setToken] = useState(localStorage.getItem("token"));
-
-  const [isFirst, setIsFirst] = useState(true);
+  const [token, setToken] = useLocalStorage(
+    token,
+    localStorage.getItem("token")
+  );
 
   useEffect(() => {
-    if (isFirst) {
-      setIsFirst(false);
-      if (token) {
-        const { exp } = jwt_decode(token);
-        if (exp * 1000 < new Date().getTime()) {
-          BridgeApi.messageApi.sendMessage({
-            message: "Your account validity has expired, Contact Admin",
-            title: "Error",
-          });
-          localStorage.removeItem("token");
-          setToken(null);
-        }
-      }
-    } else {
-      if (token) {
-        const { exp } = jwt_decode(token);
-        if (exp * 1000 < new Date().getTime()) {
-          BridgeApi.messageApi.sendMessage({
-            message: "Your account validity has expired, Contact Admin",
-            title: "Error",
-          });
-          localStorage.removeItem("token");
-          setToken(null);
-        } else {
-          localStorage.setItem("token", token);
-        }
-      } else {
+    if (token) {
+      const { exp } = jwt_decode(token);
+      if (exp * 1000 < new Date().getTime()) {
         BridgeApi.messageApi.sendMessage({
-          message: "Session expired, please login",
+          message: "Your account validity has expired, Contact Admin",
           title: "Error",
         });
+        setToken(null);
+      } else {
+        setToken(token);
       }
+    } else {
+      BridgeApi.messageApi.sendMessage({
+        message: "Session expired or not created, please login",
+        title: "Error",
+      });
     }
   }, [token]);
 
   // -------------------Handle login-------------------
-  const handleChange = (e) => {
+  const handleLoginValues = (e) => {
     const { name, value } = e.target;
     setValues({
       ...values,
@@ -59,7 +45,7 @@ export default function App() {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const res = await api.post("/login", {
       email: values.email,
@@ -92,8 +78,8 @@ export default function App() {
         </div>
       ) : (
         <LoginForm
-          handleChange={handleChange}
-          handleSubmit={handleSubmit}
+          handleLoginValues={handleLoginValues}
+          handleLoginSubmit={handleLoginSubmit}
           values={values}
         />
       )}
