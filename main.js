@@ -11,9 +11,9 @@ if (isDev) {
 let mainWin = undefined
 
 function createWindow() {
-  //const { width, height } = screen.getPrimaryDisplay().workAreaSize;
-  const width = 800;
-  const height = 600;
+  const { width, height } = screen.getPrimaryDisplay().workAreaSize;
+  // const width = 800;
+  // const height = 600;
 
   mainWin = new BrowserWindow({
     width: width,

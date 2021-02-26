@@ -1,17 +1,69 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Home, Nav, LoginForm } from "./components";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 
-function App() {
+export default function App() {
+  // -------------------authentication and authorization-------------------
   const api = axios.create({
     baseURL: `https://csfxlog-api.herokuapp.com/user/`,
   });
 
-  const [token, setToken] = useState(undefined);
+  const [values, setValues] = useState({ email: "", password: "" });
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
-  const loginReq = async () => {
-    let res = await api.post("/login", {
-      email: "test4@test.com",
-      password: "test123",
+  const [isFirst, setIsFirst] = useState(true);
+
+  useEffect(() => {
+    if (isFirst) {
+      setIsFirst(false);
+      if (token) {
+        const { exp } = jwt_decode(token);
+        if (exp * 1000 < new Date().getTime()) {
+          BridgeApi.messageApi.sendMessage({
+            message: "Your account validity has expired, Contact Admin",
+            title: "Error",
+          });
+          localStorage.removeItem("token");
+          setToken(null);
+        }
+      }
+    } else {
+      if (token) {
+        const { exp } = jwt_decode(token);
+        if (exp * 1000 < new Date().getTime()) {
+          BridgeApi.messageApi.sendMessage({
+            message: "Your account validity has expired, Contact Admin",
+            title: "Error",
+          });
+          localStorage.removeItem("token");
+          setToken(null);
+        } else {
+          localStorage.setItem("token", token);
+        }
+      } else {
+        BridgeApi.messageApi.sendMessage({
+          message: "Session expired, please login",
+          title: "Error",
+        });
+      }
+    }
+  }, [token]);
+
+  // -------------------Handle login-------------------
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const res = await api.post("/login", {
+      email: values.email,
+      password: values.password,
     });
     if (res.data.auth) {
       setToken(res.data.token);
@@ -23,12 +75,28 @@ function App() {
     }
   };
 
+  // -------------------App render-------------------
   return (
     <div>
-      <p>{token}</p>
-      <button onClick={loginReq}>log</button>
+      {token ? (
+        <div>
+          <Home />
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              setToken(null);
+            }}
+          >
+            Rem
+          </button>
+        </div>
+      ) : (
+        <LoginForm
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          values={values}
+        />
+      )}
     </div>
   );
 }
-
-export default App;
