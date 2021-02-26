@@ -10,7 +10,7 @@ export default function App() {
     baseURL: `https://csfxlog-api.herokuapp.com/user/`,
   });
 
-  const [values, setValues] = useState({ email: "", password: "" });
+  const [loginValues, setLoginValues] = useState({ email: "", password: "" });
   const [token, setToken] = useLocalStorage(
     token,
     localStorage.getItem("token")
@@ -38,18 +38,18 @@ export default function App() {
 
   // -------------------Handle login-------------------
   const handleLoginValues = (e) => {
-    const { name, value } = e.target;
-    setValues({
-      ...values,
-      [name]: value,
+    const { name, loginValue } = e.target;
+    setLoginValues({
+      ...loginValues,
+      [name]: loginValue,
     });
   };
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     const res = await api.post("/login", {
-      email: values.email,
-      password: values.password,
+      email: loginValues.email,
+      password: loginValues.password,
     });
     if (res.data.auth) {
       setToken(res.data.token);
@@ -80,7 +80,7 @@ export default function App() {
         <LoginForm
           handleLoginValues={handleLoginValues}
           handleLoginSubmit={handleLoginSubmit}
-          values={values}
+          loginValues={loginValues}
         />
       )}
     </div>
