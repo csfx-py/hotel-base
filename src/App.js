@@ -25,8 +25,6 @@ export default function App() {
           title: "Error",
         });
         setToken(null);
-      } else {
-        setToken(token);
       }
     } else {
       BridgeApi.messageApi.sendMessage({
@@ -47,12 +45,14 @@ export default function App() {
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
+
     const res = await api.post("/login", {
       email: loginValues.email,
       password: loginValues.password,
     });
     if (res.data.auth) {
       setToken(res.data.token);
+      setLoginValues({ email: "", password: "" });
     } else {
       BridgeApi.messageApi.sendMessage({
         message: res.data.message,
@@ -66,15 +66,16 @@ export default function App() {
     <div>
       {token ? (
         <div>
-          <Home />
-          <button
-            onClick={() => {
-              localStorage.removeItem("token");
-              setToken(null);
-            }}
-          >
-            Rem
-          </button>
+          <Home>
+            <button
+              onClick={() => {
+                localStorage.removeItem("token");
+                setToken(null);
+              }}
+            >
+              Rem
+            </button>
+          </Home>
         </div>
       ) : (
         <LoginForm

@@ -9,9 +9,4 @@ const GlobalStyle = createGlobalStyle`
 }
 `;
 
-export const Container = styled.div`
-  width: 100%;
-  padding: 0 14px;
-`;
-
 export default GlobalStyle;

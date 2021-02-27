@@ -16,7 +16,6 @@ const LoginForm = (props) => {
     <MainContainer>
       <LoginContainer>
         <LoginImage>
-          {console.log(WelcomeImage)}
           <Image src={WelcomeImage} alt="React Logo" />
         </LoginImage>
         <LoginFormPart>
