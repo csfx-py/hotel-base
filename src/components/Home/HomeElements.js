@@ -22,7 +22,7 @@ export const HomeMain = styled.div`
   flex-shrink: 0;
 `;
 
-export const TableForm = styled.form`
+export const Form = styled.form`
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -83,14 +83,28 @@ export const TableContainer = styled.div`
   }
 `;
 
-export const TableCard = styled.div`
+export const TableCardDiv = styled.div`
   background: #43b581;
   border-radius: 5px;
   border: none;
   height: 7rem;
   width: 7rem;
   margin: 1rem 0.5rem;
+  padding: 14px;
   flex-shrink: 0;
+  position: relative;
+`;
+
+export const TableName = styled.h1`
+  font-size: 1rem;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
+`;
+
+export const TableClose = styled.button`
+  position: absolute;
+  top: 5px;
+  right: 5px;
 `;
 
 export const MenuContainer = styled.div`

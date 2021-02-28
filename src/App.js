@@ -12,8 +12,8 @@ export default function App() {
 
   const [loginValues, setLoginValues] = useState({ email: "", password: "" });
   const [token, setToken] = useLocalStorage(
-    token,
-    localStorage.getItem("token")
+    "token",
+    localStorage.getItem("token") || ""
   );
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function App() {
       }
     } else {
       BridgeApi.messageApi.sendMessage({
-        message: "Session expired or not created, please login",
+        message: "Session expired or logged out, please login",
         title: "Error",
       });
     }
@@ -61,22 +61,15 @@ export default function App() {
     }
   };
 
+  const handleLogout = (e) => {
+    setToken(null)
+  }
+
   // -------------------App render-------------------
   return (
     <div>
       {token ? (
-        <div>
-          <Home>
-            <button
-              onClick={() => {
-                localStorage.removeItem("token");
-                setToken(null);
-              }}
-            >
-              Rem
-            </button>
-          </Home>
-        </div>
+        <Home logout={handleLogout}/>
       ) : (
         <LoginForm
           handleLoginValues={handleLoginValues}

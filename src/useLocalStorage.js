@@ -13,7 +13,8 @@ export default function useLocalStorage(key, initValue) {
   });
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
+    if (value) localStorage.setItem(key, JSON.stringify(value));
+    else localStorage.removeItem(key);
   }, [value]);
 
   return [value, setValue];
