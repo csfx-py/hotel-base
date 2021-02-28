@@ -14,6 +14,7 @@ import {
 
 const Home = (props) => {
   const [tableName, setTableName] = useState("");
+  const [tables, setTables] = useState([]);
 
   const handleChange = (e) => {
     setTableName(e.target.value);
@@ -28,13 +29,14 @@ const Home = (props) => {
   };
 
   const horizontalScroll = (e) => {
-    // e.preventDefault();
     const delta = Math.max(
       -1,
       Math.min(1, e.nativeEvent.wheelDelta || -e.nativeEvent.detail)
     );
     e.currentTarget.scrollLeft -= delta * 10;
   };
+
+  const addTable = (table) => {};
 
   return (
     <HomeContainer>
@@ -54,32 +56,8 @@ const Home = (props) => {
         </TableForm>
         <TableContainer onWheel={horizontalScroll}>
           <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
         </TableContainer>
         <MenuContainer>
-        <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
-          <TableCard>test</TableCard>
           <TableCard>test</TableCard>
         </MenuContainer>
       </HomeMain>

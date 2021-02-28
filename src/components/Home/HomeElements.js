@@ -97,7 +97,8 @@ export const MenuContainer = styled.div`
   display: flex;
   background: #2f3136;
   border: 1px solid #202225;
-  flex: 0 1 auto;
+  flex: 1 0 auto;
+  height: auto;
   flex-direction: column;
   overflow: auto;
 
