@@ -8,6 +8,9 @@ const TableForm = (props) => {
         <Company>{props.companyName}</Company>
         <div>
           <Input
+            minLength={1}
+            maxLength={8}
+            required={true}
             type="text"
             placeholder="Table name"
             value={props.tableName}

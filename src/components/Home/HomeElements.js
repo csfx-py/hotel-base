@@ -11,8 +11,28 @@ export const SideBar = styled.div`
   display: flex;
   flex-direction: column;
   width: 10%;
+  height: 100%;
   background: #202225;
   flex-shrink: 0;
+`;
+
+export const LogOutButton = styled.button`
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background: #43b581;
+  margin: 1rem;
+  font-size: 1.1rem;
+  padding: 8px 14px;
+  justify-self: flex-end;
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: rgba(67, 181, 129, 0.9);
+  }
 `;
 
 export const HomeMain = styled.div`
@@ -56,6 +76,10 @@ export const Button = styled.button`
   margin: 1rem;
   font-size: 1.1rem;
   padding: 8px 14px;
+
+  &:hover {
+    background: rgba(67, 181, 129, 0.9);
+  }
 `;
 
 export const TableContainer = styled.div`
@@ -66,6 +90,7 @@ export const TableContainer = styled.div`
   border: 1px solid #202225;
   width: 100%;
   flex-shrink: 0;
+  height: 144px;
 
   &::-webkit-scrollbar {
     height: 10px;
@@ -105,6 +130,14 @@ export const TableClose = styled.button`
   position: absolute;
   top: 5px;
   right: 5px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  outline: none;
+
+  &:hover {
+    background: rgba(67, 181, 129, 0.5);
+  }
 `;
 
 export const MenuContainer = styled.div`

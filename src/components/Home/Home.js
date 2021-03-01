@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import {
-  Button,
   HomeContainer,
   HomeMain,
+  LogOutButton,
   MenuContainer,
   SideBar,
   TableContainer,
@@ -10,6 +10,7 @@ import {
 import TableForm from "./TableForm";
 import TableCard from "./TableCard";
 import useLocalStorage from "../../useLocalStorage";
+import { BiLogOut } from "react-icons/bi";
 
 const Home = (props) => {
   const horizontalScroll = (e) => {
@@ -24,7 +25,7 @@ const Home = (props) => {
     "lastTable",
     localStorage.getItem("lastTable") || 0
   );
-  const [tablesList, setTablesList] = useState([]);
+  const [tablesList, setTablesList] = useLocalStorage("tablesList", []);
   const [tableName, setTableName] = useState("");
   const [companyName, setCompanyName] = useState("Csfx.py");
 
@@ -32,17 +33,21 @@ const Home = (props) => {
     setTableName(e.target.value);
   };
 
-  const handleTableSubmit = async (e) => {
+  const handleTableSubmit = (e) => {
     e.preventDefault();
     setLastTableID(parseInt(lastTableID) + 1);
     setTablesList([...tablesList, { key: lastTableID, name: tableName }]);
     setTableName("");
-    console.log(tablesList);
   };
 
   return (
     <HomeContainer>
-      <SideBar />
+      <SideBar>
+        <LogOutButton onClick={props.logout}>
+          <BiLogOut />
+          Logout
+        </LogOutButton>
+      </SideBar>
       <HomeMain>
         <TableForm
           handleTableSubmit={handleTableSubmit}
@@ -52,11 +57,15 @@ const Home = (props) => {
         />
         <TableContainer onWheel={horizontalScroll}>
           {tablesList.map((table, index) => (
-            <TableCard tableData={table} key={index} />
+            <TableCard
+              tablesList={tablesList}
+              tableData={table}
+              key={index}
+              setTablesList={setTablesList}
+            />
           ))}
         </TableContainer>
         <MenuContainer></MenuContainer>
-        <Button onClick={props.logout}>Logout</Button>
       </HomeMain>
     </HomeContainer>
   );
