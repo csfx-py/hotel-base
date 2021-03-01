@@ -3,7 +3,8 @@ import { TableCardDiv, TableClose, TableName } from "./HomeElements";
 import { AiOutlineClose } from "react-icons/ai";
 
 const TableCard = (props) => {
-  const handleTableDelete = () => {
+  const handleTableDelete = (e) => {
+    e.preventDefault();
     props.setTablesList(
       props.tablesList.filter((el) => el.key !== props.tableData.key)
     );

@@ -59,6 +59,7 @@ const Home = (props) => {
     const table = tablesList.filter((el) => el.key == selectedTable);
     table[0].orders = [...table[0].orders, dishObj];
     setTablesList([...tablesList]);
+    setDishObj({ dishName: "", dishQty: "" });
   };
 
   return (

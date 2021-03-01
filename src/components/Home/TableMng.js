@@ -24,13 +24,15 @@ const TableMng = (props) => {
         />
         <Button type="submit">Add</Button>
       </Form>
-      <Orders>
-        {props.table[0].orders.map((order, index) => (
-          <Order key={index}>
-            {order.dishName} x{order.dishQty}
-          </Order>
-        ))}
-      </Orders>
+      {props.table[0] ? (
+        <Orders>
+          {props.table[0].orders.map((order, index) => (
+            <Order key={index}>
+              {order.dishName} x{order.dishQty}
+            </Order>
+          ))}
+        </Orders>
+      ) : null}
     </div>
   );
 };
