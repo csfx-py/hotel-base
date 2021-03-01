@@ -14,6 +14,7 @@ export const SideBar = styled.div`
   height: 100%;
   background: #202225;
   flex-shrink: 0;
+  justify-content: space-between;
 `;
 
 export const LogOutButton = styled.button`
@@ -24,7 +25,7 @@ export const LogOutButton = styled.button`
   margin: 1rem;
   font-size: 1.1rem;
   padding: 8px 14px;
-  justify-self: flex-end;
+  /* justify-self: flex-end; */
   align-self: center;
   display: flex;
   justify-content: center;
@@ -163,6 +164,14 @@ export const MenuContainer = styled.div`
     background: #202225;
     border-radius: 10px;
   }
+`;
+
+export const Orders = styled.ul`
+  list-style-type: none;
+`;
+
+export const Order = styled.li`
+  margin: 0.8rem;
 `;
 
 // RD5029286001868
