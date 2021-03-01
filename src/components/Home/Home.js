@@ -90,7 +90,7 @@ const Home = (props) => {
           ))}
         </TableContainer>
         <MenuContainer>
-          {!selectedTable ? null : (
+          {tablesList.filter((el) => el.key == selectedTable).length ? (
             <div>
               <TableMng
                 selectedTable={selectedTable}
@@ -101,7 +101,7 @@ const Home = (props) => {
                 dishObj={dishObj}
               />
             </div>
-          )}
+          ) : null}
         </MenuContainer>
       </HomeMain>
     </HomeContainer>
