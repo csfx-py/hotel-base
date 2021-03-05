@@ -62,14 +62,14 @@ export default function App() {
   };
 
   const handleLogout = (e) => {
-    setToken(null)
-  }
+    setToken(null);
+  };
 
   // -------------------App render-------------------
   return (
-    <div>
+    <>
       {token ? (
-        <Home logout={handleLogout}/>
+        <Home logout={handleLogout} />
       ) : (
         <LoginForm
           handleLoginValues={handleLoginValues}
@@ -77,6 +77,6 @@ export default function App() {
           loginValues={loginValues}
         />
       )}
-    </div>
+    </>
   );
 }

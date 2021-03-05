@@ -3,7 +3,6 @@ import {
   LoginContainer,
   LoginImage,
   Image,
-  LoginFormPart,
   Form,
   MainContainer,
   Input,
@@ -18,27 +17,26 @@ const LoginForm = (props) => {
         <LoginImage>
           <Image src={WelcomeImage} alt="React Logo" />
         </LoginImage>
-        <LoginFormPart>
-          <Form onSubmit={props.handleLoginSubmit}>
-            <Input
-              type="email"
-              name="email"
-              id=""
-              placeholder="email"
-              value={props.loginValues.email}
-              onChange={props.handleLoginValues}
-            />
-            <Input
-              type="password"
-              name="password"
-              id=""
-              placeholder="password"
-              value={props.loginValues.password}
-              onChange={props.handleLoginValues}
-            />
-            <Button type="submit">Login</Button>
-          </Form>
-        </LoginFormPart>
+        <Form onSubmit={props.handleLoginSubmit}>
+          <Input
+            type="email"
+            name="email"
+            id=""
+            placeholder="email"
+            value={props.loginValues.email}
+            onChange={props.handleLoginValues}
+            autoFocus={true}
+          />
+          <Input
+            type="password"
+            name="password"
+            id=""
+            placeholder="password"
+            value={props.loginValues.password}
+            onChange={props.handleLoginValues}
+          />
+          <Button type="submit">Login</Button>
+        </Form>
       </LoginContainer>
     </MainContainer>
   );

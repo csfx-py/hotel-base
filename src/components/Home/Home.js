@@ -1,17 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Button,
+  Form,
   HomeContainer,
   HomeMain,
-  LogOutButton,
+  Input,
   MenuContainer,
+  OrderDataHead,
+  OrdersTable,
+  OrderTableContainer,
   SideBar,
+  SideButton,
   TableContainer,
 } from "./HomeElements";
 import TableForm from "./TableForm";
 import TableCard from "./TableCard";
+import OrderRow from "./OrderRow";
 import useLocalStorage from "../../useLocalStorage";
 import { BiLogOut } from "react-icons/bi";
-import TableMng from "./TableMng";
 
 const Home = (props) => {
   const horizontalScroll = (e) => {
@@ -30,7 +36,14 @@ const Home = (props) => {
   const [tableName, setTableName] = useState("");
   const [companyName, setCompanyName] = useState("Csfx.py");
   const [selectedTable, setSelectedTable] = useState(null);
-  const [dishObj, setDishObj] = useState({ dishName: "", dishQty: "" });
+  const [dishObj, setDishObj] = useState({
+    dishName: "",
+    dishQty: "",
+    key: 0,
+  });
+  const [selectedDish, setSelectedDish] = useState(null);
+
+  useEffect(() => {}, [tablesList, selectedTable]);
 
   const handleTableNameChange = (e) => {
     setTableName(e.target.value);
@@ -56,8 +69,8 @@ const Home = (props) => {
 
   const handleOrderSubmit = (e) => {
     e.preventDefault();
-    const table = tablesList.filter((el) => el.key == selectedTable);
-    table[0].orders = [...table[0].orders, dishObj];
+    dishObj.key = selectedTable[0].orders.length;
+    selectedTable[0].orders = [...selectedTable[0].orders, dishObj];
     setTablesList([...tablesList]);
     setDishObj({ dishName: "", dishQty: "" });
   };
@@ -66,10 +79,10 @@ const Home = (props) => {
     <HomeContainer>
       <SideBar>
         <div></div>
-        <LogOutButton onClick={props.logout}>
+        <SideButton onClick={props.logout}>
           <BiLogOut />
           Logout
-        </LogOutButton>
+        </SideButton>
       </SideBar>
       <HomeMain>
         <TableForm
@@ -90,17 +103,59 @@ const Home = (props) => {
           ))}
         </TableContainer>
         <MenuContainer>
-          {tablesList.filter((el) => el.key == selectedTable).length ? (
-            <div>
-              <TableMng
-                selectedTable={selectedTable}
-                tablesList={tablesList}
-                table={tablesList.filter((el) => el.key == selectedTable)}
-                handleDishChange={handleDishChange}
-                handleOrderSubmit={handleOrderSubmit}
-                dishObj={dishObj}
-              />
-            </div>
+          {selectedTable ? (
+            <>
+              <Form style={{ border: "none" }} onSubmit={handleOrderSubmit}>
+                <Input
+                  required={true}
+                  type="text"
+                  placeholder="dish name"
+                  name="dishName"
+                  value={dishObj.dishName}
+                  onChange={handleDishChange}
+                />
+                <Input
+                  required={true}
+                  type="number"
+                  placeholder="qty"
+                  name="dishQty"
+                  value={dishObj.dishQty}
+                  onChange={handleDishChange}
+                />
+                <Button type="submit">Add</Button>
+              </Form>
+              {selectedTable && (
+                <>
+                  <OrderTableContainer>
+                    <OrdersTable>
+                      <thead>
+                        <tr>
+                          <OrderDataHead>Items</OrderDataHead>
+                          <OrderDataHead>Rate</OrderDataHead>
+                          <OrderDataHead>Quantity</OrderDataHead>
+                          <OrderDataHead>Amount</OrderDataHead>
+                          <OrderDataHead></OrderDataHead>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {selectedTable[0].orders.map((order, index) => (
+                          <OrderRow
+                            order={order}
+                            key={index}
+                            selectedTable={selectedTable}
+                            setTablesList={setTablesList}
+                            tablesList={tablesList}
+                          />
+                        ))}
+                      </tbody>
+                    </OrdersTable>
+                  </OrderTableContainer>
+                  <Button style={{ placeSelf: "flex-end" }} type="submit">
+                    Print
+                  </Button>
+                </>
+              )}
+            </>
           ) : null}
         </MenuContainer>
       </HomeMain>

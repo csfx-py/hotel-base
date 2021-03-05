@@ -8,7 +8,7 @@ if (isDev) {
   });
 }
 
-let mainWin = undefined
+let mainWin = undefined;
 
 function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -18,6 +18,9 @@ function createWindow() {
   mainWin = new BrowserWindow({
     width: width,
     height: height,
+    minHeight: 600,
+    minWidth: 800,
+    useContentSize: true,
     webPreferences: {
       nodeIntegration: false,
       contextIsolation: true,

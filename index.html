@@ -11,10 +11,24 @@
         margin: 0;
         padding: 0;
       }
+      ::-webkit-scrollbar {
+        height: 10px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: #2f3136;
+      }
+
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: #7289da;
+        border-radius: 10px;
+      }
     </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root" style="display: flex; height: 100vh; width: 100vw"></div>
     <script src="./build/app.js"></script>
   </body>
 </html>

@@ -4,25 +4,26 @@ import { AiOutlineClose } from "react-icons/ai";
 
 const TableCard = (props) => {
   const handleTableDelete = (e) => {
-    e.preventDefault();
+    e.stopPropagation();
+    props.setSelectedTable(null);
     props.setTablesList(
       props.tablesList.filter((el) => el.key !== props.tableData.key)
     );
   };
 
   const selectTable = () => {
-    props.setSelectedTable(props.tableData.key);
+    props.setSelectedTable(
+      props.tablesList.filter((el) => el.key == props.tableData.key)
+    );
   };
 
   return (
-    <div>
-      <TableCardDiv onClick={selectTable}>
-        <TableName>{props.tableData.name}</TableName>
-        <TableClose onClick={handleTableDelete}>
-          <AiOutlineClose size="1.3em" />
-        </TableClose>
-      </TableCardDiv>
-    </div>
+    <TableCardDiv onClick={selectTable}>
+      <TableName>{props.tableData.name}</TableName>
+      <TableClose onClick={handleTableDelete}>
+        <AiOutlineClose size="1.3em" />
+      </TableClose>
+    </TableCardDiv>
   );
 };
 

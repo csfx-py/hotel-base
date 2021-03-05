@@ -5,28 +5,29 @@ export const HomeContainer = styled.div`
   height: 100vh;
   width: 100vw;
   background: #36393f;
+  flex: 1 0 auto;
 `;
 
 export const SideBar = styled.div`
   display: flex;
   flex-direction: column;
-  width: 10%;
-  height: 100%;
   background: #202225;
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  width: 100px;
   justify-content: space-between;
+  align-items: center;
+  padding: 5px;
 `;
 
-export const LogOutButton = styled.button`
+export const SideButton = styled.button`
   border: none;
   border-radius: 5px;
   color: #fff;
   background: #43b581;
-  margin: 1rem;
-  font-size: 1.1rem;
-  padding: 8px 14px;
-  /* justify-self: flex-end; */
-  align-self: center;
+  font-size: 1rem;
+  padding: 7px;
+  width: 80px;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,23 +40,21 @@ export const LogOutButton = styled.button`
 export const HomeMain = styled.div`
   display: flex;
   flex-direction: column;
-  width: 90%;
-  flex-shrink: 0;
+  flex: 1 0 auto;
 `;
 
 export const Form = styled.form`
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-around;
   border: 1px solid #202225;
-  flex-shrink: 0;
+  flex: 0 0 auto;
+  height: 80px;
 `;
 
 export const Company = styled.span`
-  font-size: 2rem;
+  font-size: 2.5rem;
   color: #fff;
-  margin: 1rem;
   font-family: "Courier New", Courier, monospace;
 `;
 
@@ -65,8 +64,12 @@ export const Input = styled.input`
   color: #99aab5;
   background: #23272a;
   margin: 1rem;
-  font-size: 1.1rem;
-  padding: 8px 14px;
+  font-size: 1.125rem;
+  padding: 7px 16px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const Button = styled.button`
@@ -75,37 +78,42 @@ export const Button = styled.button`
   color: #fff;
   background: #43b581;
   margin: 1rem;
-  font-size: 1.1rem;
-  padding: 8px 14px;
+  font-size: 1.125rem;
+  padding: 7px 7px;
 
   &:hover {
     background: rgba(67, 181, 129, 0.9);
+  }
+
+  &:hover {
+    outline: none;
   }
 `;
 
 export const TableContainer = styled.div`
   display: flex;
-  flex-direction: row;
   overflow-x: auto;
+  overflow-y: hidden;
   background: #2f3136;
   border: 1px solid #202225;
-  width: 100%;
-  flex-shrink: 0;
-  height: 144px;
+  width: calc(100vw - 100px);
+  height: 9rem;
+  flex: 0 0 auto;
 
   &::-webkit-scrollbar {
-    height: 10px;
+    height: 4px;
   }
 
   /* Track */
   &::-webkit-scrollbar-track {
-    background: #2f3136;
+    background: #202225;
+    border-radius: 25px;
   }
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: #202225;
-    border-radius: 10px;
+    background: #7289da;
+    border-radius: 25px;
   }
 `;
 
@@ -116,28 +124,37 @@ export const TableCardDiv = styled.div`
   height: 7rem;
   width: 7rem;
   margin: 1rem 0.5rem;
-  padding: 14px;
-  flex-shrink: 0;
+  padding: 7px;
+  flex: 0 0 auto;
   position: relative;
 `;
 
 export const TableName = styled.h1`
-  font-size: 1rem;
+  font-size: 1.125rem;
   color: #fff;
   font-family: "Courier New", Courier, monospace;
 `;
 
 export const TableClose = styled.button`
   position: absolute;
+  display: flex;
+  place-items: center;
   top: 5px;
   right: 5px;
-  background: transparent;
+  background: #2f3136;
   border: none;
-  color: #fff;
-  outline: none;
+  color: #99aab5;
+  font-size: 1rem;
+  border-radius: 50%;
+  padding: 2px;
 
   &:hover {
-    background: rgba(67, 181, 129, 0.5);
+    background: #7289da;
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -146,9 +163,9 @@ export const MenuContainer = styled.div`
   background: #2f3136;
   border: 1px solid #202225;
   flex: 1 0 auto;
-  height: auto;
   flex-direction: column;
-  overflow: auto;
+  height: calc(100vh - 224px);
+  width: calc(100vw - 100px);
 
   &::-webkit-scrollbar {
     width: 10px;
@@ -161,22 +178,107 @@ export const MenuContainer = styled.div`
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: #202225;
+    background: #7289da;
     border-radius: 10px;
   }
 `;
 
-export const Orders = styled.ul`
-  list-style-type: none;
+export const OrderTableContainer = styled.div`
+  flex: 1 0 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 318px;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #202225;
+    border-radius: 25px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #7289da;
+    border-radius: 25px;
+  }
 `;
 
-export const Order = styled.li`
-  margin: 0.8rem;
+export const OrdersTable = styled.table`
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: calc(100vw - 100px);
+  flex: 1 0 auto;
+`;
+
+export const Order = styled.tr`
+  font-size: 1.1rem;
+
+  &:nth-child(even) {
+    background: #202225;
+  }
+`;
+
+export const OrderDataHead = styled.th`
+  text-align: left;
+  padding: 7px;
+  background: #202225;
+  color: #fff;
+
+  &:first-child {
+    width: 50%;
+    text-align: center;
+  }
+`;
+
+export const OrderData = styled.td`
+  text-align: left;
+  padding: 7px;
+
+  &:nth-child(odd) {
+    width: 10%;
+  }
+
+  &:nth-child(even) {
+    width: 15%;
+  }
+
+  &:first-child {
+    width: 50%;
+    text-align: left;
+  }
+
+  &:last-child {
+    text-align: center;
+    width: 5%;
+  }
+`;
+
+export const DeleteOrder = styled.button`
+  display: flex;
+  place-items: center;
+  background: transparent;
+  border: none;
+  color: #99aab5;
+  font-size: 1rem;
+  border-radius: 50%;
+  padding: 2px;
+
+  &:hover {
+    background: #7289da;
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 // RD5029286001868
 // lightest #36393f
 // light #2f3136
-// dark ##202225
+// dark #202225
 // dark blue #7289da
 // button green #43b581

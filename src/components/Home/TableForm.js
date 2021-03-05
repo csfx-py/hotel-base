@@ -3,7 +3,6 @@ import { Button, Company, Input, Form } from "./HomeElements";
 
 const TableForm = (props) => {
   return (
-    <div>
       <Form onSubmit={props.handleTableSubmit}>
         <Company>{props.companyName}</Company>
         <div>
@@ -19,7 +18,6 @@ const TableForm = (props) => {
           <Button type="submit">Add Table</Button>
         </div>
       </Form>
-    </div>
   );
 };
 
