@@ -5,10 +5,16 @@ import { AiOutlineClose } from "react-icons/ai";
 const TableMng = (props) => {
   const handleDishDelete = (e) => {
     // props.tablesList.filter((el) => console.log(el));
-    // let neededIndex = undefined;
-    // props.tablesList.map((el, index) => {
-    //   if (el.key == props.selectedTable[0].key) neededIndex = index;
-    // });
+    let tableIndex = undefined,
+      dishIndex = undefined;
+    props.tablesList.map((el, i) => {
+      if (el.key == props.selectedTable[0].key) tableIndex = i;
+    });
+    props.tablesList[tableIndex].orders.map((el, i) => {
+      if (el.key == props.order.key) dishIndex = i;
+    });
+    props.tablesList[tableIndex].orders.splice(dishIndex, 1);
+    props.setTablesList([...props.tablesList]);
     // // props.setTablesList(
     // const test = props.tablesList[neededIndex].orders.filter(
     //   (el) => el.key != props.order.key
