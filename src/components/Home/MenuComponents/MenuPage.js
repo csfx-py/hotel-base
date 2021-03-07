@@ -35,7 +35,7 @@ const MenuPage = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     menuItem.id = menuID;
-    props.setMenuItems([...props.menuItems, menuItem]);
+    props.setMenu([...props.Menu, menuItem]);
     setMenuID(menuID + 1);
     setMenuItem({
       name: "",
@@ -77,12 +77,12 @@ const MenuPage = (props) => {
             </TableRow>
           </thead>
           <tbody>
-            {props.menuItems.map((obj, index) => (
+            {props.Menu.map((obj, index) => (
               <MenuRow
                 key={index}
                 obj={obj}
-                menuItems={props.menuItems}
-                setMenuItems={props.setMenuItems}
+                Menu={props.Menu}
+                setMenu={props.setMenu}
               />
             ))}
           </tbody>

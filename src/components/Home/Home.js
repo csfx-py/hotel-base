@@ -10,9 +10,9 @@ const Home = (props) => {
     settings: false,
   });
 
-  const [menuItems, setMenuItems] = useLocalStorage(
-    "menuItems",
-    localStorage.getItem("menuItems") || []
+  const [Menu, setMenu] = useLocalStorage(
+    "Menu",
+    localStorage.getItem("Menu") || []
   );
 
   const [TableList, setTableList] = useLocalStorage(
@@ -29,11 +29,13 @@ const Home = (props) => {
         <SideBarComponent setActiveTab={setActiveTab} />
       </SideBar>
       <HomeMain>
-        {activeTab.menu && (
-          <MenuPage menuItems={menuItems} setMenuItems={setMenuItems} />
-        )}
+        {activeTab.menu && <MenuPage Menu={Menu} setMenu={setMenu} />}
         {activeTab.table && (
-          <TablePage settings={settings} TableList={TableList} setTableList={setTableList} />
+          <TablePage
+            settings={settings}
+            TableList={TableList}
+            setTableList={setTableList}
+          />
         )}
         {activeTab.settings && <Settings />}
       </HomeMain>

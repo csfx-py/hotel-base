@@ -6,15 +6,16 @@ const TableCard = (props) => {
   const handleTableDelete = (e) => {
     e.stopPropagation();
     props.setSelectedTable(null);
-    props.setTablesList(
-      props.tablesList.filter((el) => el.key !== props.tableData.key)
+    props.setTableList(
+      props.TableList.filter((el) => el.key !== props.obj.key)
     );
   };
 
   const selectTable = () => {
-    props.setSelectedTable(
-      props.tablesList.filter((el) => el.key == props.tableData.key)
-    );
+    props.setSelectedTable({
+      index: props.TableList.findIndex((el) => el.key == props.obj.key),
+      object: props.TableList.filter((el) => el.key == props.obj.key),
+    });
   };
 
   return (
