@@ -79,6 +79,7 @@ export const Table = styled.table`
   width: calc(100vw - 100px);
   flex: 1 0 auto;
   color: #fff;
+  table-layout: fixed;
 `;
 
 export const TableHead = styled.th`
@@ -88,6 +89,11 @@ export const TableHead = styled.th`
 
   &:first-child {
     text-align: center;
+    width: 40%;
+  }
+  &:last-child {
+    text-align: center;
+    width: 5%;
   }
 `;
 
@@ -104,7 +110,7 @@ export const TableData = styled.td`
   padding: 7px;
 
   &:first-child {
-    min-width: 50%;
+    width: 40%;
     text-align: left;
   }
 
@@ -216,57 +222,30 @@ export const TableName = styled.h1`
   font-family: "Courier New", Courier, monospace;
 `;
 
+export const OrdersContainer = styled.div`
+  height: calc(100vh - 375px);
+  width: calc(100vw - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #202225;
+    border-radius: 25px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #7289da;
+    border-radius: 25px;
+  }
+`;
+
 // trash
-
-
-// export const TableClose = styled.button`
-//   position: absolute;
-//   display: flex;
-//   place-items: center;
-//   top: 5px;
-//   right: 5px;
-//   background: #2f3136;
-//   border: none;
-//   color: #99aab5;
-//   font-size: 1rem;
-//   border-radius: 50%;
-//   padding: 2px;
-
-//   &:hover {
-//     background: #7289da;
-//     color: #fff;
-//   }
-
-//   &:focus {
-//     outline: none;
-//   }
-// `;
-
-// export const MenuContainer = styled.div`
-//   display: flex;
-//   background: #2f3136;
-//   border: 1px solid #202225;
-//   flex: 1 0 auto;
-//   flex-direction: column;
-//   height: calc(100vh - 224px);
-//   width: calc(100vw - 100px);
-
-//   &::-webkit-scrollbar {
-//     width: 10px;
-//   }
-
-//   /* Track */
-//   &::-webkit-scrollbar-track {
-//     background: #2f3136;
-//   }
-
-//   /* Handle */
-//   &::-webkit-scrollbar-thumb {
-//     background: #7289da;
-//     border-radius: 10px;
-//   }
-// `;
-
 // export const OrderTableContainer = styled.div`
 //   flex: 1 0 auto;
 //   overflow-y: auto;

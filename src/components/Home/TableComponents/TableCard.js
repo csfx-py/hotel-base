@@ -13,8 +13,8 @@ const TableCard = (props) => {
 
   const selectTable = () => {
     props.setSelectedTable({
-      index: props.TableList.findIndex((el) => el.key == props.obj.key),
-      object: props.TableList.filter((el) => el.key == props.obj.key),
+      index: props.objIndex,
+      object: props.obj,
     });
   };
 

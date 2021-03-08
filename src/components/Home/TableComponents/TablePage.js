@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { AiOutlinePlus } from "react-icons/ai";
 import useLocalStorage from "../../../useLocalStorage";
 import {
   Button,
@@ -6,9 +7,14 @@ import {
   Form,
   FormGroup,
   Input,
+  OrdersContainer,
+  Table,
   TableContainer,
+  TableHead,
+  TableRow,
 } from "../HomeElements";
 import TableCard from "./TableCard";
+import OrderRow from "./OrderRow";
 
 const TablePage = (props) => {
   const [tableName, setTableName] = useState("");
@@ -17,6 +23,11 @@ const TablePage = (props) => {
     localStorage.getItem("tableID") || 0
   );
   const [selectedTable, setSelectedTable] = useState(null);
+  const [orderItem, setOrderItem] = useState({
+    dish: "",
+    qty: "",
+    key: null,
+  });
 
   const horizontalScroll = (e) => {
     const delta = Math.max(
@@ -26,22 +37,26 @@ const TablePage = (props) => {
     e.currentTarget.scrollLeft -= delta * 20;
   };
 
-  const handleChange = (e) => {
-    setTableName(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    props.setTableList(
-      [...props.TableList, { key: tableID, name: tableName, orders: [] }],
-      setTableID(tableID + 1)
-    );
-    setTableName("");
+  const handleAddOrderChange = (e) => {
+    const { name, value } = e.target;
+    setOrderItem({
+      ...orderItem,
+      [name]: value,
+    });
   };
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
+      <Form
+        onSubmit={(e) => {
+          e.preventDefault();
+          props.setTableList(
+            [...props.TableList, { key: tableID, name: tableName, orders: [] }],
+            setTableID(tableID + 1)
+          );
+          setTableName("");
+        }}
+      >
         <Company>{props.settings.companyName}</Company>
         <FormGroup style={{ display: "flex" }}>
           <Input
@@ -51,7 +66,9 @@ const TablePage = (props) => {
             type="text"
             placeholder="Table name"
             value={tableName}
-            onChange={handleChange}
+            onChange={(e) => {
+              setTableName(e.target.value);
+            }}
           />
           <Button type="submit">Add Table</Button>
         </FormGroup>
@@ -61,19 +78,81 @@ const TablePage = (props) => {
           <TableCard
             key={index}
             obj={obj}
+            objIndex={index}
             TableList={props.TableList}
             setTableList={props.setTableList}
             setSelectedTable={setSelectedTable}
           />
         ))}
       </TableContainer>
-      <>
-        {selectedTable
-          ? props.TableList[selectedTable.index].orders.map((obj, index) =>
-              console.log(obj)
-            )
-          : null}
-      </>
+      {selectedTable ? (
+        <>
+          <Form
+            onSubmit={(e) => {
+              e.preventDefault();
+              orderItem.key = selectedTable.object.orders.length
+                ? selectedTable.object.orders[
+                    selectedTable.object.orders.length - 1
+                  ].key + 1
+                : 0;
+              props.TableList[selectedTable.index].orders = [
+                ...props.TableList[selectedTable.index].orders,
+                orderItem,
+              ];
+              props.setTableList([...props.TableList]);
+              setOrderItem({ dish: "", qty: "" });
+            }}
+          >
+            <Input
+              onChange={handleAddOrderChange}
+              required={true}
+              value={orderItem.dish}
+              name="dish"
+              type="text"
+              placeholder="Dish name"
+            />
+            <Input
+              onChange={handleAddOrderChange}
+              required={true}
+              value={orderItem.qty}
+              name="qty"
+              type="number"
+              placeholder="Quantity"
+            />
+            <Button type="submit">
+              <AiOutlinePlus />
+            </Button>
+          </Form>
+          <OrdersContainer>
+            <Table>
+              <thead>
+                <TableRow>
+                  <TableHead>Particular</TableHead>
+                  <TableHead>Qty</TableHead>
+                  <TableHead>Price</TableHead>
+                  <TableHead>Total</TableHead>
+                  <TableHead></TableHead>
+                </TableRow>
+              </thead>
+              <tbody>
+                {props.TableList[selectedTable.index].orders.map(
+                  (obj, index) => (
+                    <OrderRow
+                      key={index}
+                      obj={obj}
+                      objIndex={index}
+                      selectedTable={selectedTable}
+                      TableList={props.TableList}
+                      setTableList={props.setTableList}
+                    />
+                  )
+                )}
+              </tbody>
+            </Table>
+          </OrdersContainer>
+          <Button style={{ placeSelf: "flex-end" }}>Print</Button>
+        </>
+      ) : null}
     </>
   );
 };

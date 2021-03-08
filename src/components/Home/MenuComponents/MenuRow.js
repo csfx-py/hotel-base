@@ -4,8 +4,7 @@ import { CloseButton, TableData, TableRow } from "../HomeElements";
 
 const MenuRow = (props) => {
   const handleDelete = (e) => {
-    props.setMenuItems(props.menuItems.filter((el) => el.id != props.obj.id));
-    // console.log(props.obj);
+    props.setMenu(props.Menu.filter((el) => el.id != props.obj.id));
   };
 
   return (

@@ -1,99 +1,33 @@
-import React from "react";
-import { DeleteOrder, Order, OrderData } from "./HomeElements";
+import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { CloseButton, TableData, TableRow } from "../HomeElements";
 
-const TableMng = (props) => {
+const OrderRow = (props) => {
+  const [selectedItem, setSelectedItem] = useState({
+    index: props.index,
+    obj: props.obj,
+  });
+
   const handleDishDelete = (e) => {
-    // props.tablesList.filter((el) => console.log(el));
-    let tableIndex = undefined,
-      dishIndex = undefined;
-    props.tablesList.map((el, i) => {
-      if (el.key == props.selectedTable[0].key) tableIndex = i;
-    });
-    props.tablesList[tableIndex].orders.map((el, i) => {
-      if (el.key == props.order.key) dishIndex = i;
-    });
-    props.tablesList[tableIndex].orders.splice(dishIndex, 1);
-    props.setTablesList([...props.tablesList]);
-    // // props.setTablesList(
-    // const test = props.tablesList[neededIndex].orders.filter(
-    //   (el) => el.key != props.order.key
-    // );
-    // console.log(test);
-    // );
+    props.TableList[props.selectedTable.index].orders.splice(props.objIndex, 1);
+    props.setTableList([...props.TableList]);
   };
 
   return (
     <>
-      <Order>
-        <OrderData>{props.order.dishName}</OrderData>
-        <OrderData>Rs.20000</OrderData>
-        <OrderData>x{props.order.dishQty}</OrderData>
-        <OrderData>Rs.20000</OrderData>
-        <OrderData>
-          <DeleteOrder onClick={handleDishDelete}>
+      <TableRow>
+        <TableData>{props.obj.dish}</TableData>
+        <TableData>Rs.20000</TableData>
+        <TableData>x{props.obj.qty}</TableData>
+        <TableData>Rs.20000</TableData>
+        <TableData>
+          <CloseButton onClick={handleDishDelete}>
             <AiOutlineClose />
-          </DeleteOrder>
-        </OrderData>
-      </Order>
+          </CloseButton>
+        </TableData>
+      </TableRow>
     </>
   );
 };
 
-export default TableMng;
-
-// {
-//   tablesList.filter((el) => el.key == selectedTable).length ? (
-//     <>
-//       <Form style={{ border: "none" }} onSubmit={handleOrderSubmit}>
-//         <Input
-//           required={true}
-//           type="text"
-//           placeholder="dish name"
-//           name="dishName"
-//           value={props.dishObj.dishName}
-//           onChange={handleDishChange}
-//         />
-//         <Input
-//           required={true}
-//           type="number"
-//           placeholder="qty"
-//           name="dishQty"
-//           value={props.dishObj.dishQty}
-//           onChange={handleDishChange}
-//         />
-//         <Button type="submit">Add</Button>
-//       </Form>
-//       {table[0] && (
-//         <OrderTableContainer>
-//           <OrdersTable>
-//             <thead>
-//               <tr>
-//                 <OrderDataHead>Items</OrderDataHead>
-//                 <OrderDataHead>Rate</OrderDataHead>
-//                 <OrderDataHead>Quantity</OrderDataHead>
-//                 <OrderDataHead>Amount</OrderDataHead>
-//                 <OrderDataHead></OrderDataHead>
-//               </tr>
-//             </thead>
-//             <tbody>
-//               {table[0].orders.map((order, index) => (
-//                 <Order key={index} order={order} />
-//               ))}
-//             </tbody>
-//           </OrdersTable>
-//         </OrderTableContainer>
-//       )}
-//       <Button style={{ placeSelf: "flex-end" }} type="submit">
-//         Print
-//       </Button>
-//     </>
-//   ) : // selectedTable={selectedTable}
-//   // tablesList={tablesList}
-//   // table={tablesList.filter((el) => el.key == selectedTable)}
-//   // handleDishChange={handleDishChange}
-//   // handleOrderSubmit={handleOrderSubmit}
-//   // dishObj={dishObj}
-//   // />
-//   null;
-// }
+export default OrderRow;
