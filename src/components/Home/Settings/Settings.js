@@ -26,6 +26,7 @@ const Settings = (props) => {
             name="companyName"
             value={input.value}
             onChange={handleChange}
+            placeholder={props.settings.companyName}
           />
           <Button type="submit">Change</Button>
         </FormGroup>

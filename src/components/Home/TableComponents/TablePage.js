@@ -8,6 +8,8 @@ import {
   FormSpan,
   Input,
   OrdersContainer,
+  SuggestDiv,
+  SuggestList,
   Table,
   TableContainer,
   TableHead,
@@ -15,6 +17,7 @@ import {
 } from "../HomeElements";
 import TableCard from "./TableCard";
 import OrderRow from "./OrderRow";
+import SuggestItem from "./SuggestItem";
 
 const TablePage = (props) => {
   const [tableName, setTableName] = useState("");
@@ -25,9 +28,12 @@ const TablePage = (props) => {
   const [selectedTable, setSelectedTable] = useState(null);
   const [orderItem, setOrderItem] = useState({
     dish: "",
+    price: "",
     qty: "",
+    total: "",
     key: null,
   });
+  const [suggest, setSuggest] = useState({ state: false, source: [] });
 
   const horizontalScroll = (e) => {
     const delta = Math.max(
@@ -43,6 +49,14 @@ const TablePage = (props) => {
       ...orderItem,
       [name]: value,
     });
+  };
+
+  const handleFocus = (e) => {
+    setSuggest({ suggest: props.Menu, state: true });
+  };
+
+  const handleBlur = (e) => {
+    setSuggest({ ...suggest, state: true });
   };
 
   return (
@@ -88,6 +102,7 @@ const TablePage = (props) => {
       {selectedTable ? (
         <>
           <Form
+            autoComplete="off"
             onSubmit={(e) => {
               e.preventDefault();
               orderItem.key = selectedTable.object.orders.length
@@ -103,14 +118,32 @@ const TablePage = (props) => {
               setOrderItem({ dish: "", qty: "" });
             }}
           >
-            <Input
-              onChange={handleAddOrderChange}
-              required={true}
-              value={orderItem.dish}
-              name="dish"
-              type="text"
-              placeholder="Dish name"
-            />
+            <div style={{ position: "relative" }}>
+              <Input
+                onChange={handleAddOrderChange}
+                required={true}
+                value={orderItem.dish}
+                name="dish"
+                type="text"
+                placeholder="Dish name"
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+              />
+              {suggest.state && (
+                <SuggestDiv>
+                  <SuggestList>
+                    {props.Menu.map((obj, index) => (
+                      <SuggestItem
+                        key={index}
+                        obj={obj}
+                        setOrderItem={setOrderItem}
+                        orderItem={orderItem}
+                      />
+                    ))}
+                  </SuggestList>
+                </SuggestDiv>
+              )}
+            </div>
             <Input
               onChange={handleAddOrderChange}
               required={true}

@@ -39,6 +39,7 @@ const Home = () => {
             settings={settings}
             TableList={TableList}
             setTableList={setTableList}
+            Menu={Menu}
           />
         )}
         {activeTab.settings && (

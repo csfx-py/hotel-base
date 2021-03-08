@@ -17,9 +17,9 @@ const OrderRow = (props) => {
     <>
       <TableRow>
         <TableData>{props.obj.dish}</TableData>
-        <TableData>Rs.20000</TableData>
+        <TableData>Rs.{props.obj.price}</TableData>
         <TableData>x{props.obj.qty}</TableData>
-        <TableData>Rs.20000</TableData>
+        <TableData>Rs.{props.obj.price * props.obj.qty}</TableData>
         <TableData>
           <CloseButton onClick={handleDishDelete}>
             <AiOutlineClose />

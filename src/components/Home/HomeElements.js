@@ -146,6 +146,49 @@ export const CloseButton = styled.button`
   }
 `;
 
+export const SuggestDiv = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  max-height: 150px;
+  width: 100%;
+  padding: 4px;
+  background: #202225;
+  border-radius: 5px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  z-index: 99;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: #202225;
+    border-radius: 25px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: #7289da;
+    border-radius: 25px;
+  }
+`;
+
+export const SuggestList = styled.ul``;
+
+export const SuggestListItem = styled.li`
+  padding: 4px;
+  border-radius: 2px;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+
+  &:hover {
+    background: #2f3136;
+  }
+`;
 // sidebar-------------------------------------------------------
 export const SideButton = styled.button`
   border: none;
@@ -248,93 +291,7 @@ export const OrdersContainer = styled.div`
 // settings-------------------------------------------------------
 export const company = styled.span``;
 
-// trash
-// export const OrderTableContainer = styled.div`
-//   flex: 1 0 auto;
-//   overflow-y: auto;
-//   overflow-x: hidden;
-//   height: 318px;
-
-//   &::-webkit-scrollbar {
-//     width: 5px;
-//   }
-
-//   /* Track */
-//   &::-webkit-scrollbar-track {
-//     background: #202225;
-//     border-radius: 25px;
-//   }
-
-//   /* Handle */
-//   &::-webkit-scrollbar-thumb {
-//     background: #7289da;
-//     border-radius: 25px;
-//   }
-// `;
-
-// export const Order = styled.tr`
-//   font-size: 1.1rem;
-
-//   &:nth-child(even) {
-//     background: #202225;
-//   }
-// `;
-
-// export const OrderDataHead = styled.th`
-//   text-align: left;
-//   padding: 7px;
-//   background: #202225;
-//   color: #fff;
-
-//   &:first-child {
-//     width: 50%;
-//     text-align: center;
-//   }
-// `;
-
-// export const OrderData = styled.td`
-//   text-align: left;
-//   padding: 7px;
-
-//   &:nth-child(odd) {
-//     width: 10%;
-//   }
-
-//   &:nth-child(even) {
-//     width: 15%;
-//   }
-
-//   &:first-child {
-//     width: 50%;
-//     text-align: left;
-//   }
-
-//   &:last-child {
-//     text-align: center;
-//     width: 5%;
-//   }
-// `;
-
-// export const DeleteOrder = styled.button`
-//   display: flex;
-//   place-items: center;
-//   background: transparent;
-//   border: none;
-//   color: #99aab5;
-//   font-size: 1rem;
-//   border-radius: 50%;
-//   padding: 2px;
-
-//   &:hover {
-//     background: #7289da;
-//     color: #fff;
-//   }
-
-//   &:focus {
-//     outline: none;
-//   }
-// `;
-
+// extras
 // RD5029286001868
 // lightest #36393f
 // light #2f3136
