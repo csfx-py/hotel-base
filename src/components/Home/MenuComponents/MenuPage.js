@@ -4,6 +4,8 @@ import MenuRow from "./MenuRow";
 import {
   Button,
   Form,
+  FormGroup,
+  FormSpan,
   Input,
   MenuTableContainer,
   Table,
@@ -47,25 +49,28 @@ const MenuPage = (props) => {
   return (
     <>
       <Form onSubmit={handleSubmit}>
-        <Input
-          type="text"
-          placeholder="Dish Name"
-          required={true}
-          name="name"
-          value={menuItem.name}
-          onChange={handleChange}
-        />
-        <Input
-          type="number"
-          placeholder="Dish Price"
-          required={true}
-          name="price"
-          value={menuItem.price}
-          onChange={handleChange}
-        />
-        <Button>
-          <AiOutlinePlus />
-        </Button>
+        <FormSpan>{props.settings.companyName}</FormSpan>
+        <FormGroup>
+          <Input
+            type="text"
+            placeholder="Dish Name"
+            required={true}
+            name="name"
+            value={menuItem.name}
+            onChange={handleChange}
+          />
+          <Input
+            type="number"
+            placeholder="Dish Price"
+            required={true}
+            name="price"
+            value={menuItem.price}
+            onChange={handleChange}
+          />
+          <Button>
+            <AiOutlinePlus />
+          </Button>
+        </FormGroup>
       </Form>
       <MenuTableContainer>
         <Table>

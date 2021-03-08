@@ -20,7 +20,9 @@ const Home = () => {
     localStorage.getItem("TableList") || []
   );
   const [settings, setSettings] = useLocalStorage("settings", {
-    companyName: "test",
+    companyName: localStorage.getItem("settings")
+      ? localStorage.getItem("settings").companyName
+      : "",
   });
 
   return (
@@ -29,7 +31,9 @@ const Home = () => {
         <SideBarComponent setActiveTab={setActiveTab} />
       </SideBar>
       <HomeMain>
-        {activeTab.menu && <MenuPage Menu={Menu} setMenu={setMenu} />}
+        {activeTab.menu && (
+          <MenuPage Menu={Menu} setMenu={setMenu} settings={settings} />
+        )}
         {activeTab.table && (
           <TablePage
             settings={settings}
@@ -37,7 +41,9 @@ const Home = () => {
             setTableList={setTableList}
           />
         )}
-        {activeTab.settings && <Settings />}
+        {activeTab.settings && (
+          <Settings settings={settings} setSettings={setSettings} />
+        )}
       </HomeMain>
     </HomeContainer>
   );

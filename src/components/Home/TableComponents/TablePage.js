@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import useLocalStorage from "../../../useLocalStorage";
 import {
   Button,
-  Company,
   Form,
   FormGroup,
+  FormSpan,
   Input,
   OrdersContainer,
   Table,
@@ -57,7 +57,7 @@ const TablePage = (props) => {
           setTableName("");
         }}
       >
-        <Company>{props.settings.companyName}</Company>
+        <FormSpan>{props.settings.companyName}</FormSpan>
         <FormGroup style={{ display: "flex" }}>
           <Input
             minLength={1}

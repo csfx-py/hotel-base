@@ -25,7 +25,7 @@ export const HomeMain = styled.div`
   flex: 1 0 auto;
 `;
 
-// common
+// common-------------------------------------------------------
 export const Form = styled.form`
   display: flex;
   align-items: center;
@@ -33,6 +33,12 @@ export const Form = styled.form`
   border: 1px solid #202225;
   flex: 0 0 auto;
   height: 80px;
+`;
+
+export const FormSpan = styled.span`
+  font-size: 2.5rem;
+  color: #fff;
+  font-family: "Courier New", Courier, monospace;
 `;
 
 export const FormGroup = styled.div`
@@ -140,7 +146,7 @@ export const CloseButton = styled.button`
   }
 `;
 
-// sidebar
+// sidebar-------------------------------------------------------
 export const SideButton = styled.button`
   border: none;
   border-radius: 5px;
@@ -164,19 +170,13 @@ export const SideButton = styled.button`
   }
 `;
 
-// menu
+// menu-------------------------------------------------------
 export const MenuTableContainer = styled.div`
   display: flex;
   flex-direction: 1 0 auto;
 `;
 
-// table
-export const Company = styled.span`
-  font-size: 2.5rem;
-  color: #fff;
-  font-family: "Courier New", Courier, monospace;
-`;
-
+// table-------------------------------------------------------
 export const TableContainer = styled.div`
   display: flex;
   overflow-x: auto;
@@ -244,6 +244,9 @@ export const OrdersContainer = styled.div`
     border-radius: 25px;
   }
 `;
+
+// settings-------------------------------------------------------
+export const company = styled.span``;
 
 // trash
 // export const OrderTableContainer = styled.div`
