@@ -56,7 +56,7 @@ const TablePage = (props) => {
   };
 
   const handleBlur = (e) => {
-    setSuggest({ ...suggest, state: true });
+    setSuggest({ ...suggest, state: false });
   };
 
   return (

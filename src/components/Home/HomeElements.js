@@ -148,16 +148,17 @@ export const CloseButton = styled.button`
 
 export const SuggestDiv = styled.div`
   position: absolute;
-  top: 100%;
+  top: 90%;
   left: 0;
   max-height: 150px;
   width: 100%;
   padding: 4px;
-  background: #202225;
+  background: #2f3136;
   border-radius: 5px;
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 99;
+  box-shadow: 5px 5px 20px 2px rgba(0, 0, 0, 0.75);
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -181,12 +182,13 @@ export const SuggestList = styled.ul``;
 export const SuggestListItem = styled.li`
   padding: 4px;
   border-radius: 2px;
-  color: #fff;
+  color: #99aab5;
   display: flex;
   justify-content: space-between;
 
   &:hover {
-    background: #2f3136;
+    background: #202225;
+    color: #fff;
   }
 `;
 // sidebar-------------------------------------------------------
@@ -294,6 +296,7 @@ export const company = styled.span``;
 // extras
 // RD5029286001868
 // lightest #36393f
+// light text #99aab5
 // light #2f3136
 // dark #202225
 // dark blue #7289da

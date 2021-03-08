@@ -6,4 +6,9 @@ contextBridge.exposeInMainWorld("BridgeApi", {
       ipcRenderer.send("message", data);
     },
   },
+  printApi: {
+    sendPrint(data) {
+      ipcRenderer.send("print", data);
+    },
+  },
 });
