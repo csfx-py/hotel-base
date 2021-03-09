@@ -9,6 +9,7 @@ if (isDev) {
 }
 
 let mainWin = undefined;
+let printWin = undefined;
 
 function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -22,7 +23,6 @@ function createWindow() {
     minWidth: 800,
     useContentSize: true,
     webPreferences: {
-      nodeIntegration: false,
       contextIsolation: true,
       worldSafeExecuteJavaScript: true,
       preload: path.join(__dirname, "preload.js"),
@@ -36,7 +36,25 @@ function createWindow() {
   mainWin.webContents.openDevTools();
 
   // Remove title bar menu
-  // mainWin.removeMenu();
+  mainWin.removeMenu();
+
+  printWin = new BrowserWindow({
+    width: "800px",
+    height: "600px",
+    // show: false,
+    parent: mainWin,
+    webPreferences: {
+      nodeIntegration: true,
+    },
+  });
+  // and load the index.html of the app.
+  printWin.loadFile(path.join(__dirname, "print.html"));
+
+  // Open the DevTools.
+  printWin.webContents.openDevTools();
+
+  // Remove title bar menu
+  printWin.removeMenu();
 }
 
 app.whenReady().then(createWindow);
@@ -51,6 +69,15 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
+});
+
+ipcMain.on("print", (e, data) => {
+  printWin.webContents.send("print", data);
+});
+
+ipcMain.on("printed", (e) => {
+  printWin.close();
+  printWin = undefined;
 });
 
 // -------------------------------- I P C --------------------------------

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Home, Nav, LoginForm } from "./components";
+import { Home, LoginForm } from "./components";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import useLocalStorage from "./useLocalStorage";

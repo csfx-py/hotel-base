@@ -14,6 +14,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TableData,
 } from "../HomeElements";
 import TableCard from "./TableCard";
 import OrderRow from "./OrderRow";
@@ -186,10 +187,33 @@ const TablePage = (props) => {
                     />
                   )
                 )}
+                <TableRow>
+                  <TableData style={{ textAlign: "right", fontWeight: "bold" }}>
+                    Total
+                  </TableData>
+                  <TableData></TableData>
+                  <TableData></TableData>
+                  <TableData style={{ fontWeight: "bold" }}>
+                    Rs.
+                    {props.TableList[selectedTable.index].orders
+                      .map((obj) => obj.price * obj.qty)
+                      .reduce((sum, item) => item + sum)}
+                  </TableData>
+                  <TableData></TableData>
+                </TableRow>
               </tbody>
             </Table>
           </OrdersContainer>
-          <Button style={{ placeSelf: "flex-end" }}>Print</Button>
+          <Button
+            style={{ placeSelf: "flex-end" }}
+            onClick={(e) => {
+              BridgeApi.printApi.sendPrint({
+                orders: props.TableList[selectedTable.index].orders,
+              });
+            }}
+          >
+            Print
+          </Button>
         </>
       ) : null}
     </>
