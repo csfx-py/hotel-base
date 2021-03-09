@@ -49,10 +49,16 @@ const TablePage = (props) => {
       ...orderItem,
       [name]: value,
     });
+    setSuggest({
+      ...suggest,
+      source: props.Menu.filter((el) =>
+        el.name.toLowerCase().match(value.toLowerCase())
+      ),
+    });
   };
 
   const handleFocus = (e) => {
-    setSuggest({ suggest: props.Menu, state: true });
+    setSuggest({ ...suggest, source: props.Menu, state: true });
   };
 
   const handleBlur = (e) => {
@@ -132,7 +138,7 @@ const TablePage = (props) => {
               {suggest.state && (
                 <SuggestDiv>
                   <SuggestList>
-                    {props.Menu.map((obj, index) => (
+                    {suggest.source.map((obj, index) => (
                       <SuggestItem
                         key={index}
                         obj={obj}
