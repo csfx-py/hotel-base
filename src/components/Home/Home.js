@@ -3,7 +3,7 @@ import { HomeContainer, HomeMain, SideBar } from "./HomeElements";
 import useLocalStorage from "../../useLocalStorage";
 import { MenuPage, SideBarComponent, TablePage, Settings } from "./index";
 
-const Home = () => {
+const Home = (props) => {
   const [activeTab, setActiveTab] = useState({
     menu: false,
     table: true,
@@ -19,6 +19,7 @@ const Home = () => {
     "Tables",
     localStorage.getItem("TableList") || []
   );
+
   const [settings, setSettings] = useLocalStorage("settings", {
     companyName: localStorage.getItem("settings")
       ? localStorage.getItem("settings").companyName
@@ -28,7 +29,7 @@ const Home = () => {
   return (
     <HomeContainer>
       <SideBar>
-        <SideBarComponent setActiveTab={setActiveTab} />
+        <SideBarComponent setActiveTab={setActiveTab} logout={props.logout} />
       </SideBar>
       <HomeMain>
         {activeTab.menu && (
