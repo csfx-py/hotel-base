@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack --config webpack.dev.config.js --mode development && electron .",
-    "build": "webpack --config webpack.build.config.js --mode production"
+    "build": "webpack --config webpack.build.config.js --mode production && electron-builder -w"
   },
   "repository": {
     "type": "git",
@@ -25,11 +25,9 @@
     "babel-loader": "^8.2.2",
     "electron": "^11.3.0",
     "electron-builder": "^22.10.5",
-    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
     "webpack": "^5.21.2",
-    "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "^3.11.2"
+    "webpack-cli": "^4.5.0"
   },
   "dependencies": {
     "axios": "^0.21.1",
@@ -37,6 +35,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-icons": "^4.2.0",
-    "styled-components": "^5.2.1"
+    "styled-components": "^5.2.1",
+    "webpack-node-externals": "^2.5.2"
   }
 }

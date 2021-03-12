@@ -31,6 +31,7 @@ module.exports = [
             },
           },
           include: defaultInclude,
+          exclude: /node_modules/,
         },
         {
           test: /\.(jpe?g|png|gif)$/,
@@ -51,10 +52,6 @@ module.exports = [
     plugins: [new HtmlWebpackPlugin()],
     resolve: {
       extensions: [".js"],
-    },
-    output: {
-      filename: "app.js",
-      path: path.resolve(__dirname, "src", "dist"),
     },
   },
   {
