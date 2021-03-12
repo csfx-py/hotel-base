@@ -2,14 +2,8 @@ const { app, BrowserWindow, screen, ipcMain, dialog } = require("electron");
 const path = require("path");
 
 const isDev = !app.isPackaged;
-if (isDev) {
-  require("electron-reload")(__dirname, {
-    electron: path.join(__dirname, "node_modules", ".bin", "electron"),
-  });
-}
 
 let mainWin = undefined;
-let printWin = undefined;
 
 function createWindow() {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -28,33 +22,16 @@ function createWindow() {
       preload: path.join(__dirname, "preload.js"),
     },
   });
-
+  console.log(__dirname);
   // and load the index.html of the app.
-  mainWin.loadFile(path.join(__dirname, "index.html"));
+
+  mainWin.loadFile(path.join(__dirname, "dist", "index.html"));
 
   // Open the DevTools.
   mainWin.webContents.openDevTools();
 
   // Remove title bar menu
   mainWin.removeMenu();
-
-  printWin = new BrowserWindow({
-    width: "800px",
-    height: "600px",
-    // show: false,
-    parent: mainWin,
-    webPreferences: {
-      nodeIntegration: true,
-    },
-  });
-  // and load the index.html of the app.
-  printWin.loadFile(path.join(__dirname, "print.html"));
-
-  // Open the DevTools.
-  printWin.webContents.openDevTools();
-
-  // Remove title bar menu
-  printWin.removeMenu();
 }
 
 app.whenReady().then(createWindow);
@@ -69,15 +46,6 @@ app.on("activate", () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow();
   }
-});
-
-ipcMain.on("print", (e, data) => {
-  printWin.webContents.send("print", data);
-});
-
-ipcMain.on("printed", (e) => {
-  printWin.close();
-  printWin = undefined;
 });
 
 // -------------------------------- I P C --------------------------------

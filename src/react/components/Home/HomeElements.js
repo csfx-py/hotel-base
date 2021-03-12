@@ -29,7 +29,7 @@ export const HomeMain = styled.div`
 export const Form = styled.form`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border: 1px solid #202225;
   flex: 0 0 auto;
   height: 80px;
@@ -37,6 +37,7 @@ export const Form = styled.form`
 
 export const FormSpan = styled.span`
   font-size: 2.5rem;
+  margin: 1rem;
   color: #fff;
   font-family: "Courier New", Courier, monospace;
 `;

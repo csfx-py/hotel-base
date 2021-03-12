@@ -79,7 +79,7 @@ const TablePage = (props) => {
         }}
       >
         <FormSpan>{props.settings.companyName}</FormSpan>
-        <FormGroup style={{ display: "flex" }}>
+        <FormGroup>
           <Input
             minLength={1}
             maxLength={7}
@@ -125,43 +125,45 @@ const TablePage = (props) => {
               setOrderItem({ dish: "", qty: "" });
             }}
           >
-            <div style={{ position: "relative" }}>
+            <FormGroup>
+              <div style={{ position: "relative" }}>
+                <Input
+                  onChange={handleAddOrderChange}
+                  required={true}
+                  value={orderItem.dish}
+                  name="dish"
+                  type="text"
+                  placeholder="Dish name"
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                />
+                {suggest.state && (
+                  <SuggestDiv>
+                    <SuggestList>
+                      {suggest.source.map((obj, index) => (
+                        <SuggestItem
+                          key={index}
+                          obj={obj}
+                          setOrderItem={setOrderItem}
+                          orderItem={orderItem}
+                        />
+                      ))}
+                    </SuggestList>
+                  </SuggestDiv>
+                )}
+              </div>
               <Input
                 onChange={handleAddOrderChange}
                 required={true}
-                value={orderItem.dish}
-                name="dish"
-                type="text"
-                placeholder="Dish name"
-                onFocus={handleFocus}
-                onBlur={handleBlur}
+                value={orderItem.qty}
+                name="qty"
+                type="number"
+                placeholder="Quantity"
               />
-              {suggest.state && (
-                <SuggestDiv>
-                  <SuggestList>
-                    {suggest.source.map((obj, index) => (
-                      <SuggestItem
-                        key={index}
-                        obj={obj}
-                        setOrderItem={setOrderItem}
-                        orderItem={orderItem}
-                      />
-                    ))}
-                  </SuggestList>
-                </SuggestDiv>
-              )}
-            </div>
-            <Input
-              onChange={handleAddOrderChange}
-              required={true}
-              value={orderItem.qty}
-              name="qty"
-              type="number"
-              placeholder="Quantity"
-            />
-            <Button type="submit">
-              <AiOutlinePlus />
-            </Button>
+              <Button type="submit">
+                <AiOutlinePlus />
+              </Button>
+            </FormGroup>
           </Form>
           <OrdersContainer>
             <Table>
@@ -187,20 +189,24 @@ const TablePage = (props) => {
                     />
                   )
                 )}
-                <TableRow>
-                  <TableData style={{ textAlign: "right", fontWeight: "bold" }}>
-                    Total
-                  </TableData>
-                  <TableData></TableData>
-                  <TableData></TableData>
-                  <TableData style={{ fontWeight: "bold" }}>
-                    Rs.
-                    {props.TableList[selectedTable.index].orders
-                      .map((obj) => obj.price * obj.qty)
-                      .reduce((sum, item) => item + sum)}
-                  </TableData>
-                  <TableData></TableData>
-                </TableRow>
+                {props.TableList[selectedTable.index].orders.length > 0 ? (
+                  <TableRow>
+                    <TableData
+                      style={{ textAlign: "right", fontWeight: "bold" }}
+                    >
+                      Total
+                    </TableData>
+                    <TableData></TableData>
+                    <TableData></TableData>
+                    <TableData style={{ fontWeight: "bold" }}>
+                      Rs.
+                      {props.TableList[selectedTable.index].orders
+                        .map((obj) => obj.price * obj.qty)
+                        .reduce((sum, item) => item + sum)}
+                    </TableData>
+                    <TableData></TableData>
+                  </TableRow>
+                ) : null}
               </tbody>
             </Table>
           </OrdersContainer>

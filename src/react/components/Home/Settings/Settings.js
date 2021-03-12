@@ -31,6 +31,21 @@ const Settings = (props) => {
           <Button type="submit">Change</Button>
         </FormGroup>
       </Form>
+      <Form onSubmit={handleSubmit}>
+        <FormSpan>GST invoice</FormSpan>
+        <FormGroup>
+          <Input
+            max="14"
+            min="3"
+            required={true}
+            name="GSTIN"
+            value={input.value}
+            onChange={handleChange}
+            placeholder={props.settings.GSTIN}
+          />
+          <Button type="submit">Change</Button>
+        </FormGroup>
+      </Form>
     </>
   );
 };

@@ -2,12 +2,11 @@
   "name": "hotel-bs",
   "version": "1.0.0",
   "description": "hotel management",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --config webpack.common.js --watch",
-    "start": "electron .",
-    "build": "webpack --config webpack.prod.js"
+    "start": "webpack --config webpack.dev.config.js --mode development && electron .",
+    "build": "webpack --config webpack.build.config.js --mode production"
   },
   "repository": {
     "type": "git",
@@ -26,11 +25,11 @@
     "babel-loader": "^8.2.2",
     "electron": "^11.3.0",
     "electron-builder": "^22.10.5",
-    "electron-reload": "^1.5.0",
     "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.3.1",
     "webpack": "^5.21.2",
     "webpack-cli": "^4.5.0",
-    "webpack-merge": "^5.7.3"
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "axios": "^0.21.1",
